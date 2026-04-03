@@ -7,16 +7,14 @@ from src.exceptions.task_exceptions import (
     TaskStatusError
 )
 
-
 class ValidatorDescriptor:
 
     def __init__(self, name = None):
-# name : Optional[str]
         self.name = name
         self._private_name = None
 
     def __set_name__(self, owner, name):
-# owner - класс, которому принадлежит дескриптор
+
         self.name = name
         self._private_name = f"_{name}"
 
@@ -39,7 +37,6 @@ class ValidatorDescriptor:
 class NonDataDescriptor:
 
     def __init__(self, func):
-# func: Callable
         self.func = func
         self.name = None
 
@@ -76,8 +73,8 @@ class IdDescriptor(ValidatorDescriptor):
 class DescriptionDescriptor(ValidatorDescriptor):
 
     def __init__(self, mini: int = 1, maxi: int = 500, name = None):
-        #name: Optional[str]
-        super().__init__(name)#вызов конструктора родительского класса,
+        super().__init__(name)
+        #вызов конструктора родительского класса,
         # super() возвращает временный объект родительского класса
         # позволяет обращаться к методам родительского класса
         self.mini = mini
