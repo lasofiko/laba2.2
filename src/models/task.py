@@ -11,9 +11,7 @@ from src.exceptions.task_exceptions import TaskStateError, TaskDescriptionError
 
 
 class Task:
-#Объявление дескрипторов на уровне класса
-#Python автоматически вызывает __set_name__ для каждого
-#Дескрипторы перехватывают доступ к этим атрибутам
+
     id = IdDescriptor()
     description = DescriptionDescriptor(mini=1, maxi=500)
     priority = PriorityDescriptor()
@@ -171,7 +169,7 @@ class Task:
             lines.append(f" УСТАРЕЛА ")
 
         return "\n".join(lines)
-# Это объединение списка строк в одну строку с разделителем \n (перевод строки)
+
     def __eq__(self, other):
         if not isinstance(other, Task):
             return False
