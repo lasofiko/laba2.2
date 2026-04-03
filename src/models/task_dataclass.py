@@ -12,17 +12,11 @@ from src.exceptions.task_exceptions import TaskStateError, TaskDescriptionError
 @dataclass
 class TaskDataClass:
 
-    # Модель задачи через dataclass с использованием дескрипторов.
-    #  Автоматический __init__, __repr__, __eq__
-    #  Меньше шаблонного кода
-    #  Дескрипторы всё равно работают
-
     _id = IdDescriptor()
     _description = DescriptionDescriptor(mini=1, maxi=500)
     _priority = PriorityDescriptor()
     _status = StatusDescriptor()
 
-    # Поля dataclass
     created_at: datetime = field(default_factory=datetime.now)
     completed_at: Optional[datetime] = field(default=None)
 
@@ -31,7 +25,7 @@ class TaskDataClass:
             description, priority = "medium",
             status = "pending", created_at = None
     ):
-        # Инициализация с использованием дескрипторов.
+        
         self._id = task_id
         self._description = description
         self._priority = priority
@@ -40,7 +34,6 @@ class TaskDataClass:
         self.completed_at = None
         self._validate_invariants()
 
-    # Property для доступа к значениям через дескрипторы
     @property
     def id(self) -> str:
         return self._id
